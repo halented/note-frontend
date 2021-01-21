@@ -1,8 +1,14 @@
 import React from 'react'
+import { Layout } from 'antd'
+const { Header } = Layout
 
 function Home() {
     return (
-        <div>homepage, baby</div>
+        <Layout>
+            <Header style={{color: 'white'}}>
+                Welcome to hot girl shit
+            </Header>
+        </Layout>
     )
 }
 
