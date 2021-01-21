@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, InputNumber, Layout, Breadcrumb, Menu } from 'antd'
+import { Form, Input, Button, InputNumber, Layout } from 'antd'
 const { Header, Content, Footer } = Layout;
 
 
@@ -12,22 +12,22 @@ const tailLayout = {
 }
 
 
-function Login() {
+function Login({ submitForm }) {
     const [form] = Form.useForm()
 
 
     return (
         <Layout className='layout'>
-            <Header style={{color: "white"}}>
-                hot girl shit
+            <Header style={{ color: "white" }}>
+                Welcome to hot girl shit
             </Header>
             <Content>
                 <Form
-                    onFinish={(eventInfo) => console.log("object", eventInfo)}
+                    onFinish={submitForm}
                     {...layout}
                     label="login"
                     form={form}
-                    style={{paddingTop: "24px"}}>
+                    style={{ paddingTop: "24px" }}>
                     <Form.Item
                         label='Username'
                         name='username'
@@ -39,12 +39,6 @@ function Login() {
                         name='email'
                         rules={[{ required: true, message: "Email is required" }]}>
                         <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label='Age'
-                        name='age'
-                    >
-                        <InputNumber />
                     </Form.Item>
                     <Form.Item {...tailLayout}>
                         <Button type='primary' htmlType='submit'>Login</Button>
@@ -62,3 +56,10 @@ export default Login
 
 
 // make it so age can't go negative or over 150
+// age should only render on signup
+{/* <Form.Item
+label='Age'
+name='age'
+>
+<InputNumber />
+</Form.Item> */}

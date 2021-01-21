@@ -1,32 +1,32 @@
 import './App.css';
 import { useEffect, useState } from 'react'
 import Login from './components/login'
+import Landing from './components/landing'
+
+import { login, signup } from './api.services'
 
 function App() {
 
-  const [openingAct, changeOpener] = useState("hello...")
-  const [tester, changeTester] = useState(true)
+  const [openingAct, changeOpener] = useState(<Landing />)
 
   useEffect(() => {
-    // on page load, wait 2 seconds then add "there" to title
-    if (tester) {
-      setTimeout(() => {
-        changeOpener("hello...there")
-        changeTester(false)
-      }, 2000)
-    }
-    else {
-      setTimeout(() => {
-        changeOpener(<Login />)
-      }, 2000)
-    }
-  }, [tester])
+    // on page load, wait two seconds then render the login
+    setTimeout(() => {
+      changeOpener(<Login />)
+    }, 2000)
+  }, [])
 
+  const submitForm = (eventInfo) => {
+    login(eventInfo)
+      .then(res => res.json())
+      .then(json => json)
 
+  }
 
   return (
     <div className="App">
-        <Login />
+      {/* {openingAct} */}
+      <Login submitForm={submitForm} />
     </div>
   );
 }
