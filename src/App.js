@@ -2,31 +2,37 @@ import './App.css';
 import { useEffect, useState } from 'react'
 import Login from './components/login'
 import Landing from './components/landing'
+import Home from './components/home'
 
 import { login, signup } from './api.services'
 
 function App() {
 
   const [openingAct, changeOpener] = useState(<Landing />)
-
-  useEffect(() => {
-    // on page load, wait two seconds then render the login
-    setTimeout(() => {
-      changeOpener(<Login />)
-    }, 2000)
-  }, [])
+  const [user, setUser] = useState(null)
 
   const submitForm = (eventInfo) => {
     login(eventInfo)
       .then(res => res.json())
-      .then(json => json)
-
+      .then(setUser)
+      .catch(alert)
   }
+
+  useEffect(() => {
+    // on page load, wait two seconds then render the login
+    setTimeout(() => {
+      changeOpener(<Login submitForm={submitForm} />)
+    }, 2000)
+  }, [])
 
   return (
     <div className="App">
-      {/* {openingAct} */}
-      <Login submitForm={submitForm} />
+      {user ?
+        <Home />
+        :
+        openingAct
+      }
+
     </div>
   );
 }
