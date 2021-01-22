@@ -1,10 +1,7 @@
 const USERS_URL = 'http://localhost:5000/users'
 
 const login = (userInfo) => {
-    // should be something like {username: "Frog", email: "froggo@fogspot.com"}
-    // alter it for the db to match the model tables...antd wont let me use name='name' so it still says username for the key when it gets here
-    userInfo.name = userInfo['username']
-    delete userInfo["username"]
+    // userInfo should be something like {username: "Frog", email: "froggo@fogspot.com"}
 
     // fetch to the DB to save the instance
     return fetch(`${USERS_URL}/login`, {
